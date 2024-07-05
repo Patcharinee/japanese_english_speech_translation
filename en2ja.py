@@ -11,7 +11,10 @@ import warnings
 def speak_text(command):
     tts = gTTS(text=command, lang='ja')
     tts.save('speech.mp3')
-    os.system('start speech.mp3')
+    if os.name == 'nt':  # For Windows
+        os.system('start speech.mp3')
+    else:  # For MacOS
+        os.system('afplay speech.mp3')
 
 
 translator = Translator()
